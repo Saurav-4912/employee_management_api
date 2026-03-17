@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * REST controller for managing employees.
- */
+
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
@@ -44,18 +42,14 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    /*
-     * GET /api/employees/{id} - Get employee by id
-     */
+    // Get employee by id
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         Employee response = employeeService.getEmployeeById(id);
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * PUT /api/employees/{id} - Update employee
-     */
+    // Update employee
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(
             @PathVariable Long id,
@@ -64,9 +58,7 @@ public class EmployeeController {
         return ResponseEntity.ok(updated);
     }
 
-    /**
-     * DELETE /api/employees/{id} - Delete employee
-     */
+    // Delete employee
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);

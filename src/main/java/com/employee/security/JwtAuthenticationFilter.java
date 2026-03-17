@@ -18,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Filter that intercepts every HTTP request to validate the JWT token.
- * Extends OncePerRequestFilter to ensure single execution per request.
- */
+
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

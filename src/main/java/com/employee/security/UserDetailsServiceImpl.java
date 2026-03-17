@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
-/**
- * Custom implementation of Spring Security UserDetailsService.
- * Loads user details from the database for authentication.
- */
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

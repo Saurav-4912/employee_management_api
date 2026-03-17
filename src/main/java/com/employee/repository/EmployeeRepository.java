@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-/**
- * Repository for Employee entity with pagination and sorting support.
- */
+
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 

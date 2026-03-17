@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * REST controller for authentication: registration and login.
- */
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -20,10 +18,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    /**
-     * POST /api/auth/register - Registers a new user.
-     * Uses ModelAttribute to accept URL-encoded form parameters.
-     */
+    // register new user
     @PostMapping(value = "/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody User request) {
         User savedUser = authService.register(request);
@@ -35,9 +30,7 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /**
-     * POST /api/auth/login - Authenticates a user and returns a JWT token.
-     */
+    // Authenticate user and return jwt token
     @PostMapping(value = "/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User request) {
         String token = authService.login(request);

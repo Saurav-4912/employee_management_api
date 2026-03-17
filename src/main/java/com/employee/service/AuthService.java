@@ -13,9 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Service layer for authentication operations: register and login.
- */
+
 @Service
 public class AuthService {
 
@@ -31,9 +29,8 @@ public class AuthService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    /**
-     * Registers a new user. Throws RuntimeException if username/email exists.
-     */
+
+    // Registers a new user. Throws RuntimeException if username/email exists.
     @Transactional
     public User register(User userRequest) {
         if (userRepository.existsByUsername(userRequest.getUsername())) {
@@ -52,9 +49,7 @@ public class AuthService {
         return userRepository.save(user);
     }
 
-    /**
-     * Authenticates a user and returns a JWT token.
-     */
+    // Authenticates a user and returns a JWT token.
     public String login(User loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

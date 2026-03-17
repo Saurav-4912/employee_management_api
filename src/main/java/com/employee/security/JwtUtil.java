@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
-/**
- * Utility class for JWT token generation, parsing, and validation.
- */
+
 @Component
 public class JwtUtil {
 
