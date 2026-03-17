@@ -19,20 +19,18 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    /**
-     * Creates a new employee record.
-     */
+    // Creates a new employee record.
     @Transactional
     public Employee createEmployee(Employee employee) {
         if (employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Employee with email '" + employee.getEmail() + "' already exists.");
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.BAD_REQUEST,
+                    "Employee with email '" + employee.getEmail() + "' already exists.");
         }
         return employeeRepository.save(employee);
     }
 
-    /**
-     * Retrieves all employees with pagination and sorting support.
-     */
+    // Retrieves all employees with pagination and sorting support.
     @Transactional(readOnly = true)
     public Page<Employee> getAllEmployees(
             int page, int size, String sortBy, String sortDirection,
@@ -69,7 +67,9 @@ public class EmployeeService {
 
         // Check for email conflict with another employee
         if (employeeRepository.existsByEmailAndIdNot(request.getEmail(), id)) {
-            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Employee with email '" + request.getEmail() + "' already exists.");
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.BAD_REQUEST,
+                    "Employee with email '" + request.getEmail() + "' already exists.");
         }
 
         employee.setName(request.getName());
@@ -95,6 +95,7 @@ public class EmployeeService {
 
     private Employee findEmployeeOrThrow(Long id) {
         return employeeRepository.findById(id)
-                 .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Employee not found with id: " + id));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.NOT_FOUND, "Employee not found with id: " + id));
     }
 }

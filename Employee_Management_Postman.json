@@ -7,7 +7,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:8080",
+      "value": "http://localhost:8081",
       "type": "string"
     },
     {
@@ -25,67 +25,124 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
             ],
             "body": {
               "mode": "urlencoded",
               "urlencoded": [
-                { "key": "username", "value": "admin", "type": "text" },
-                { "key": "email", "value": "admin@company.com", "type": "text" },
-                { "key": "password", "value": "admin123", "type": "text" }
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "admin@company.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "admin123",
+                  "type": "text"
+                }
               ]
             },
             "url": {
               "raw": "{{base_url}}/api/auth/register",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "register"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
             },
             "description": "Register a new user. Returns a JWT token if registration is successful."
           }
-
         },
         {
           "name": "Login",
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
             ],
             "body": {
               "mode": "urlencoded",
               "urlencoded": [
-                { "key": "username", "value": "admin", "type": "text" },
-                { "key": "password", "value": "admin123", "type": "text" }
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "admin123",
+                  "type": "text"
+                }
               ]
             },
             "url": {
               "raw": "{{base_url}}/api/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "login"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
             },
             "description": "Login and receive JWT token. Token is auto-saved to collection variable."
           }
-
         },
         {
           "name": "Register - Duplicate Username (Expect 409)",
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
             ],
             "body": {
               "mode": "urlencoded",
               "urlencoded": [
-                { "key": "username", "value": "admin", "type": "text" },
-                { "key": "email", "value": "another@company.com", "type": "text" },
-                { "key": "password", "value": "pass123", "type": "text" }
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "another@company.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "pass123",
+                  "type": "text"
+                }
               ]
             },
             "url": {
               "raw": "{{base_url}}/api/auth/register",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "register"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
             }
           },
           "event": [
@@ -110,8 +167,14 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -119,8 +182,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/employees",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ]
             }
           },
           "event": [
@@ -145,8 +213,14 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -154,8 +228,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/employees",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ]
             }
           }
         },
@@ -164,8 +243,14 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -173,8 +258,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/employees",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ]
             }
           }
         },
@@ -183,17 +273,37 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees?page=0&size=10&sortBy=id&sortDir=asc",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sortBy", "value": "id" },
-                { "key": "sortDir", "value": "asc" }
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "sortDir",
+                  "value": "asc"
+                }
               ]
             }
           },
@@ -219,17 +329,37 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees?page=0&size=10&sortBy=salary&sortDir=desc",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sortBy", "value": "salary" },
-                { "key": "sortDir", "value": "desc" }
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "salary"
+                },
+                {
+                  "key": "sortDir",
+                  "value": "desc"
+                }
               ]
             }
           }
@@ -239,14 +369,25 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees?department=Engineering",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ],
               "query": [
-                { "key": "department", "value": "Engineering" }
+                {
+                  "key": "department",
+                  "value": "Engineering"
+                }
               ]
             }
           }
@@ -256,14 +397,25 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees?search=john",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ],
               "query": [
-                { "key": "search", "value": "john" }
+                {
+                  "key": "search",
+                  "value": "john"
+                }
               ]
             }
           }
@@ -273,12 +425,21 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees/1",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees",
+                "1"
+              ]
             }
           },
           "event": [
@@ -302,12 +463,21 @@
           "request": {
             "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees/9999",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees", "9999"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees",
+                "9999"
+              ]
             }
           },
           "event": [
@@ -327,8 +497,14 @@
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -336,8 +512,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/employees/1",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees",
+                "1"
+              ]
             }
           },
           "event": [
@@ -361,12 +543,21 @@
           "request": {
             "method": "DELETE",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "url": {
               "raw": "{{base_url}}/api/employees/1",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees",
+                "1"
+              ]
             }
           },
           "event": [
@@ -391,8 +582,14 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -400,8 +597,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/employees",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ]
             }
           },
           "event": [
@@ -427,8 +629,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/employees",
-              "host": ["{{base_url}}"],
-              "path": ["api", "employees"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "employees"
+              ]
             }
           },
           "event": [

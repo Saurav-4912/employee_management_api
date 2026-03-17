@@ -20,18 +20,14 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    /**
-     * POST /api/employees - Create a new employee
-     */
+    // Create a new employee
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         Employee created = employeeService.createEmployee(employee);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    /**
-     * GET /api/employees - Get all employees with pagination and sorting
-     */
+    // Get all employees with pagination and sorting
     @GetMapping
     public ResponseEntity<Page<Employee>> getAllEmployees(
             @RequestParam(defaultValue = "0") int page,
@@ -48,7 +44,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    /**
+    /*
      * GET /api/employees/{id} - Get employee by id
      */
     @GetMapping("/{id}")

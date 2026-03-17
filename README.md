@@ -72,6 +72,4 @@ mvn test
 | PUT | `/api/employees/{id}` | Update existing employee |
 | DELETE | `/api/employees/{id}` | Delete employee |
 
-## 📂 Documentation
-- A Postman collection is included in the root folder: `Employee_Management_Postman.json`.
-- [Walkthrough & Fixes](.gemini/antigravity/brain/0f158ce8-88ac-4689-9be0-a02e11e1b0e7/walkthrough.md) (Internal Documentation)
+
