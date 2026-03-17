@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +37,6 @@ public class AuthController {
 
     /**
      * POST /api/auth/login - Authenticates a user and returns a JWT token.
-     * Uses ModelAttribute to accept URL-encoded form parameters.
      */
     @PostMapping(value = "/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User request) {
