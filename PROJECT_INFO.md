@@ -1,12 +1,12 @@
 # Employee Management System - Spring Boot + JWT
 
 ## Project Overview
-A full-stack Spring Boot REST API for managing employee records with JWT-based authentication.
+A professional Spring Boot REST API for managing employee records with JWT-based authentication. The project has been simplified to use direct Entity interaction for better readability.
 
 ### Tech Stack
 | Layer | Technology |
 |---|---|
-| Language | Java 11 |
+| Language | Java 17 |
 | Framework | Spring Boot 2.7.x |
 | Security | Spring Security + JWT (JJWT 0.11.5) |
 | Database | MySQL 8 (H2 for tests) |
@@ -20,6 +20,7 @@ A full-stack Spring Boot REST API for managing employee records with JWT-based a
 ```
 employee-management-system/
 ├── pom.xml
+├── README.md
 ├── PROJECT_INFO.md
 ├── Employee_Management_Postman.json          ← Postman collection
 └── src/
@@ -37,42 +38,27 @@ employee-management-system/
     │   │   │   └── EmployeeRepository.java
     │   │   ├── model/
     │   │   │   ├── User.java
-    │   │   │   ├── Employee.java
-    │   │   │   └── Role.java
-    │   │   ├── dto/
-    │   │   │   ├── RegisterRequest.java
-    │   │   │   ├── LoginRequest.java
-    │   │   │   ├── AuthResponse.java
-    │   │   │   ├── EmployeeRequest.java
-    │   │   │   ├── EmployeeResponse.java
-    │   │   │   └── PagedResponse.java
-    │   │   ├── security/
-    │   │   │   ├── SecurityConfig.java
-    │   │   │   ├── JwtUtil.java
-    │   │   │   ├── JwtAuthenticationFilter.java
-    │   │   │   └── UserDetailsServiceImpl.java
-    │   │   └── exception/
-    │   │       ├── ResourceNotFoundException.java
-    │   │       ├── DuplicateResourceException.java
-    │   │       ├── ErrorResponse.java
-    │   │       └── GlobalExceptionHandler.java
+    │   │   │   └── Employee.java
+    │   │   └── security/
+    │   │       ├── SecurityConfig.java
+    │   │       ├── JwtUtil.java
+    │   │       ├── JwtAuthenticationFilter.java
+    │   │       └── UserDetailsServiceImpl.java
     │   └── resources/
     │       └── application.properties
     └── test/
         ├── java/com/employee/
         │   ├── service/
-        │   │   ├── EmployeeServiceTest.java  (7 unit tests)
-        │   │   └── AuthServiceTest.java      (5 unit tests)
+        │   │   └── EmployeeServiceTest.java
         │   └── repository/
-        │       └── EmployeeRepositoryTest.java (6 integration tests)
-        └── resources/
-            └── application.properties        (H2 config)
+        │       ├── EmployeeRepositoryTest.java
+        │       └── UserRepositoryTest.java
 ```
 
 ---
 
 ## Prerequisites
-- **Java 11+** installed (`java -version`)
+- **Java 17+** installed (`java -version`)
 - **Maven 3.6+** installed (`mvn -version`)
 - **MySQL 8** running locally
 - **Postman** for API testing
@@ -91,10 +77,10 @@ The application uses `createDatabaseIfNotExist=true` so it can also auto-create.
 Edit `src/main/resources/application.properties`:
 ```properties
 spring.datasource.username=root
-spring.datasource.password=root   # ← change to your MySQL password
+spring.datasource.password=your_password   # ← change to your MySQL password
 ```
 
-> Tables are auto-created by Hibernate (`ddl-auto=update`).
+> Tables are auto-created by Hibernate (`ddl-auto=create`).
 
 ---
 
@@ -102,7 +88,6 @@ spring.datasource.password=root   # ← change to your MySQL password
 
 ### Option A: Maven Command
 ```bash
-cd D:\Antigravity_Project\Employee_System
 mvn spring-boot:run
 ```
 
@@ -117,7 +102,7 @@ java -jar target/employee-management-system-1.0.0.jar
 mvn test
 ```
 
-The server starts on **http://localhost:8080**
+The server starts on **http://localhost:8081**
 
 ---
 
@@ -145,45 +130,29 @@ The server starts on **http://localhost:8080**
 ## Request / Response Examples
 
 ### 1. Register User
-**POST** `http://localhost:8080/api/auth/register`
+**POST** `http://localhost:8081/api/auth/register`
 ```json
 {
-  "username": "admin",
-  "email": "admin@company.com",
-  "password": "admin123"
-}
-```
-**Response (201):**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiJ9...",
-  "tokenType": "Bearer",
-  "username": "admin",
-  "email": "admin@company.com",
-  "role": "ROLE_USER",
-  "message": "User registered successfully!"
+  "username": "saurav",
+  "email": "saurav@example.com",
+  "password": "password123"
 }
 ```
 
 ---
 
 ### 2. Login
-**POST** `http://localhost:8080/api/auth/login`
+**POST** `http://localhost:8081/api/auth/login`
 ```json
 {
-  "username": "admin",
-  "password": "admin123"
+  "username": "saurav",
+  "password": "password123"
 }
 ```
 **Response (200):**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9...",
-  "tokenType": "Bearer",
-  "username": "admin",
-  "email": "admin@company.com",
-  "role": "ROLE_USER",
-  "message": "Login successful!"
+  "token": "eyJhbGciOiJIUzI1NiJ9..."
 }
 ```
 
@@ -193,134 +162,26 @@ The server starts on **http://localhost:8080**
 ---
 
 ### 3. Create Employee
-**POST** `http://localhost:8080/api/employees`
+**POST** `http://localhost:8081/api/employees`
 
 **Headers:** `Authorization: Bearer <your-token>`
 ```json
 {
   "name": "John Doe",
-  "email": "john.doe@company.com",
-  "department": "Engineering",
-  "position": "Software Engineer",
-  "salary": 75000.00,
-  "dateOfJoining": "2023-01-15"
-}
-```
-**Response (201):**
-```json
-{
-  "id": 1,
-  "name": "John Doe",
-  "email": "john.doe@company.com",
-  "department": "Engineering",
-  "position": "Software Engineer",
-  "salary": 75000.00,
-  "dateOfJoining": "2023-01-15"
+  "email": "john.doe@example.com",
+  "department": "IT",
+  "position": "Java Developer",
+  "salary": 55000.00,
+  "dateOfJoining": "2024-03-17"
 }
 ```
 
 ---
 
 ### 4. Get All Employees (Paginated + Sorted)
-**GET** `http://localhost:8080/api/employees?page=0&size=5&sortBy=name&sortDir=asc`
+**GET** `http://localhost:8081/api/employees?page=0&size=10&sortBy=name&sortDir=asc`
 
 **Headers:** `Authorization: Bearer <token>`
-
-**Optional query parameters:**
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `page` | `0` | Page number (0-indexed) |
-| `size` | `10` | Records per page |
-| `sortBy` | `id` | Field to sort (id, name, salary, department) |
-| `sortDir` | `asc` | Sort direction: `asc` or `desc` |
-| `department` | - | Filter by department |
-| `position` | - | Filter by position |
-| `search` | - | Search by name or email |
-
-**Response (200):**
-```json
-{
-  "content": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@company.com",
-      "department": "Engineering",
-      "position": "Software Engineer",
-      "salary": 75000.00,
-      "dateOfJoining": "2023-01-15"
-    }
-  ],
-  "pageNumber": 0,
-  "pageSize": 5,
-  "totalElements": 1,
-  "totalPages": 1,
-  "last": true
-}
-```
-
----
-
-### 5. Get Employee by ID
-**GET** `http://localhost:8080/api/employees/1`
-
-**Headers:** `Authorization: Bearer <token>`
-
----
-
-### 6. Update Employee
-**PUT** `http://localhost:8080/api/employees/1`
-
-**Headers:** `Authorization: Bearer <token>`
-```json
-{
-  "name": "John Doe",
-  "email": "john.doe@company.com",
-  "department": "Engineering",
-  "position": "Senior Software Engineer",
-  "salary": 90000.00,
-  "dateOfJoining": "2023-01-15"
-}
-```
-
----
-
-### 7. Delete Employee
-**DELETE** `http://localhost:8080/api/employees/1`
-
-**Headers:** `Authorization: Bearer <token>`
-
-**Response:** `204 No Content`
-
----
-
-## Error Responses
-
-All errors follow a consistent format:
-```json
-{
-  "status": 404,
-  "error": "Not Found",
-  "message": "Employee not found with id : '99'",
-  "path": "/api/employees/99",
-  "timestamp": "2024-01-15T10:30:00"
-}
-```
-
-### Validation Error Example (400)
-```json
-{
-  "status": 400,
-  "error": "Validation Failed",
-  "message": "Input validation failed. Please check the errors.",
-  "path": "/api/employees",
-  "timestamp": "2024-01-15T10:30:00",
-  "validationErrors": {
-    "email": "Email must be valid",
-    "salary": "Salary must be greater than 0"
-  }
-}
-```
 
 ---
 
@@ -334,20 +195,9 @@ All errors follow a consistent format:
 ### Set Up Environment Variable
 1. Click **Environments** → **New**
 2. Name it `Employee System Local`
-3. Add variable: `base_url` = `http://localhost:8080`
+3. Add variable: `base_url` = `http://localhost:8081`
 4. Add variable: `auth_token` = *(leave blank - auto-filled on login)*
 5. Click **Save** and select this environment
-
-### Testing Flow in Postman
-1. **Register** → sends POST to `/api/auth/register`
-2. **Login** → sends POST to `/api/auth/login` (copy the token from response)
-3. Set `auth_token` variable to the copied token
-4. **Create Employee** → POST with Bearer token
-5. **Get All Employees** → GET with pagination params
-6. **Update Employee** → PUT with ID
-7. **Delete Employee** → DELETE with ID
-
-> All employee endpoints have `Authorization: Bearer {{auth_token}}` pre-configured.
 
 ---
 
@@ -358,41 +208,31 @@ All errors follow a consistent format:
 | Algorithm | HS256 |
 | Token Expiry | 24 hours (86400000 ms) |
 | Header | `Authorization: Bearer <token>` |
-| Secret (configurable) | Set in `application.properties` |
+| Secret | Configurable in `application.properties` |
 
 ---
 
 ## Running Unit Tests
 
 ```bash
-# Run all tests
 mvn test
-
-# Run specific test class
-mvn test -Dtest=EmployeeServiceTest
-mvn test -Dtest=AuthServiceTest
-mvn test -Dtest=EmployeeRepositoryTest
 ```
 
 **Test Summary:**
-| Test Class | Tests | Type |
-|---|---|---|
-| `EmployeeServiceTest` | 7 | Unit (Mockito) |
-| `AuthServiceTest` | 5 | Unit (Mockito) |
-| `EmployeeRepositoryTest` | 6 | Integration (H2) |
-| **Total** | **18** | |
+- `EmployeeServiceTest`: Logic validation with Mockito.
+- `EmployeeRepositoryTest`: H2 Integration tests for data access.
+- `UserRepositoryTest`: Authentication data layer tests.
 
 ---
 
-## GitHub Setup
+## Common Issues & Fixes
 
-```bash
-cd D:\Antigravity_Project\Employee_System
-git init
-git add .
-git commit -m "feat: complete Employee Management System with JWT auth"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/employee-management-system.git
+| Issue | Fix |
+|-------|-----|
+| `Access Denied 403` | Token missing/expired. Re-login and update token |
+| `Port 8081 in use` | Check if another instance is running and kill it |
+| MySQL connection refused | Verify `application.properties` credentials and MySQL status |
+ remote add origin https://github.com/YOUR_USERNAME/employee-management-system.git
 git push -u origin main
 ```
 
