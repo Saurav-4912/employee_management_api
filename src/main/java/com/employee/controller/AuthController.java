@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -19,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     // register new user
-    @PostMapping(value = "/register")
+    @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody User request) {
         User savedUser = authService.register(request);
 
@@ -31,7 +30,7 @@ public class AuthController {
     }
 
     // Authenticate user and return jwt token
-    @PostMapping(value = "/login")
+    @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User request) {
         String token = authService.login(request);
 

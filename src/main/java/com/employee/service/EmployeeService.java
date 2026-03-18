@@ -10,9 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Service layer for Employee CRUD operations with pagination and sorting.
- */
+
 @Service
 public class EmployeeService {
 
@@ -50,17 +48,14 @@ public class EmployeeService {
         return employeeRepository.findByFilters(deptFilter, posFilter, searchFilter, pageable);
     }
 
-    /**
-     * Retrieves a single employee by ID.
-     */
+    // Retrieve single employee by Id
     @Transactional(readOnly = true)
     public Employee getEmployeeById(Long id) {
+
         return findEmployeeOrThrow(id);
     }
 
-    /**
-     * Updates an existing employee record.
-     */
+    // Update existing employee record
     @Transactional
     public Employee updateEmployee(Long id, Employee request) {
         Employee employee = findEmployeeOrThrow(id);
@@ -82,9 +77,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    /**
-     * Deletes an employee by ID.
-     */
+    // Delete an employee by id
     @Transactional
     public void deleteEmployee(Long id) {
         Employee employee = findEmployeeOrThrow(id);
