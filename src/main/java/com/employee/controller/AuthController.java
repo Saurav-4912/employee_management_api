@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class AuthController {
 
     // register new user
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(@RequestBody User request) {
+    public ResponseEntity<Map<String, String>> register(@Valid @RequestBody User request) {
         User savedUser = authService.register(request);
 
         Map<String, String> response = new HashMap<>();

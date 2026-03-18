@@ -1,5 +1,6 @@
 package com.employee.service;
 
+import com.employee.exception.UserAlreadyExistsException;
 import com.employee.model.Role;
 import com.employee.model.User;
 import com.employee.repository.UserRepository;
@@ -34,10 +35,14 @@ public class AuthService {
     @Transactional
     public User register(User userRequest) {
         if (userRepository.existsByUsername(userRequest.getUsername())) {
-            throw new RuntimeException("Username '" + userRequest.getUsername() + "' is already taken.");
+            throw new UserAlreadyExistsException(
+                    "Username '" + userRequest.getUsername() + "' is already taken."
+            );
         }
         if (userRepository.existsByEmail(userRequest.getEmail())) {
-            throw new RuntimeException("Email '" + userRequest.getEmail() + "' is already registered.");
+            throw new UserAlreadyExistsException(
+                    "Email '" + userRequest.getEmail() + "' is already registered."
+            );
         }
 
         User user = new User();

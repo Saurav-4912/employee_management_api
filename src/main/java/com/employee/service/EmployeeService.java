@@ -1,5 +1,7 @@
 package com.employee.service;
 
+import com.employee.exception.EmployeeAlreadyExistsException;
+import com.employee.exception.ResourceNotFoundException;
 import com.employee.model.Employee;
 import com.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 public class EmployeeService {
@@ -21,9 +22,9 @@ public class EmployeeService {
     @Transactional
     public Employee createEmployee(Employee employee) {
         if (employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new org.springframework.web.server.ResponseStatusException(
-                    org.springframework.http.HttpStatus.BAD_REQUEST,
-                    "Employee with email '" + employee.getEmail() + "' already exists.");
+            throw new EmployeeAlreadyExistsException(
+                    "Employee with email '" + employee.getEmail() + "' already exists."
+            );
         }
         return employeeRepository.save(employee);
     }
@@ -60,11 +61,10 @@ public class EmployeeService {
     public Employee updateEmployee(Long id, Employee request) {
         Employee employee = findEmployeeOrThrow(id);
 
-        // Check for email conflict with another employee
         if (employeeRepository.existsByEmailAndIdNot(request.getEmail(), id)) {
-            throw new org.springframework.web.server.ResponseStatusException(
-                    org.springframework.http.HttpStatus.BAD_REQUEST,
-                    "Employee with email '" + request.getEmail() + "' already exists.");
+            throw new EmployeeAlreadyExistsException(
+                    "Employee with email '" + request.getEmail() + "' already exists."
+            );
         }
 
         employee.setName(request.getName());
@@ -88,7 +88,7 @@ public class EmployeeService {
 
     private Employee findEmployeeOrThrow(Long id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
-                        org.springframework.http.HttpStatus.NOT_FOUND, "Employee not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Employee not found with id: " + id));
     }
 }
